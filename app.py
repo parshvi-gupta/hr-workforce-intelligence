@@ -5,14 +5,33 @@ import plotly.express as px
 from src.analytics import attrition_rate, department_summary, tenure_bands, salary_summary, data_quality, validate_schema
 
 st.set_page_config(page_title="HR Workforce Intelligence", page_icon="👥", layout="wide")
+st.markdown('<style>
+.stApp{background:linear-gradient(180deg,#f5f8fc 0%,#fff 40%);color:#10243a}
+.block-container{max-width:1320px;padding-top:1rem;padding-bottom:3rem}
+[data-testid="stSidebar"]{background:#f0f4f9;border-right:1px solid #e1e8f0}
+[data-testid="stMetric"]{background:#fff;border:1px solid #e3ebf3;border-radius:16px;padding:16px 18px;box-shadow:0 3px 14px rgba(16,36,58,.04)}
+[data-testid="stMetricLabel"] p{color:#6b7d90;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+[data-testid="stMetricValue"]{color:#10243a;font-weight:750}
+.stTabs [data-baseweb="tab-list"]{gap:8px;border-bottom:1px solid #e4ebf2}
+.stTabs [data-baseweb="tab"]{height:48px;border-radius:12px 12px 0 0;padding:0 16px;font-weight:650}
+.stTabs [aria-selected="true"]{color:#168e83!important;border-bottom-color:#19a89b!important}
+div[data-testid="stDataFrame"],div[data-testid="stTable"]{border:1px solid #e4ebf2;border-radius:14px;overflow:hidden}
+div[data-testid="stPlotlyChart"]{background:white;border:1px solid #e8eef4;border-radius:16px;padding:8px}
+button[kind="primary"]{background:linear-gradient(90deg,#147e78,#19a89b);border:0;border-radius:10px;font-weight:700}
+.hero{padding:24px 26px;border-radius:22px;background:linear-gradient(120deg,#10263d,#183c56 62%,#147e78);color:white;margin:0 0 20px;box-shadow:0 10px 30px rgba(16,36,58,.12)}
+.hero h1{font-size:2.1rem;margin:0 0 7px;letter-spacing:-.04em;color:white}
+.hero p{color:#d1e5ed;margin:0;font-size:1rem}
+.hero .eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.14em;color:#83ded3;margin-bottom:8px}
+.section-label{color:#718399;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+</style>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .block-container {padding-top:1.6rem; padding-bottom:2.5rem;}
 [data-testid="stMetric"] {background:rgba(120,120,120,.07); padding:14px 16px; border-radius:14px; border:1px solid rgba(120,120,120,.15);}
 </style>
 """, unsafe_allow_html=True)
-st.title("👥 HR Workforce Intelligence")
-st.caption("Understand workforce patterns through descriptive, aggregate analytics.")
+
+st.markdown('<div class="hero"><div class="eyebrow">PEOPLE ANALYTICS · DECISION SUPPORT</div><h1>HR Workforce Intelligence</h1><p>Explore workforce composition, attrition, compensation and data health with aggregate, descriptive insights.</p></div>', unsafe_allow_html=True)
 
 @st.cache_data
 def sample_data():
