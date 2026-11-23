@@ -88,6 +88,24 @@ c2.metric("Attrition rate", f"{attrition_rate(df):.1%}")
 c3.metric("Median monthly salary", f"₹{df['monthly_salary'].median():,.0f}" if df["monthly_salary"].notna().any() else "N/A")
 c4.metric("Average engagement", f"{df['engagement_score'].mean():.2f}/5" if df["engagement_score"].notna().any() else "N/A")
 
+# Executive insight layer (descriptive, filtered population)
+dept_insights = department_summary(df).reset_index()
+st.markdown("### Executive signals")
+sig1, sig2, sig3 = st.columns(3)
+highest_attr = dept_insights.sort_values("attrition_rate", ascending=False).iloc[0] if not dept_insights.empty else None
+largest_dept = dept_insights.sort_values("employee_count", ascending=False).iloc[0] if not dept_insights.empty else None
+if highest_attr is not None:
+    sig1.markdown("**Highest department attrition**")
+    sig1.metric(str(highest_attr["department"]), f"{highest_attr['attrition_rate']:.1%}", help="Descriptive department-level attrition rate")
+if largest_dept is not None:
+    sig2.markdown("**Largest department**")
+    sig2.metric(str(largest_dept["department"]), f"{int(largest_dept['employee_count']):,} employees")
+eng_avg = df["engagement_score"].mean()
+sig3.markdown("**Engagement benchmark**")
+sig3.metric("Average score", f"{eng_avg:.2f}/5" if pd.notna(eng_avg) else "N/A")
+with st.expander("How to read these signals"):
+    st.write("Signals summarize the currently filtered workforce only. Department differences are descriptive and do not establish causes or support individual employment decisions.")
+
 overview, attrition, compensation, quality = st.tabs(["Overview", "Attrition", "Compensation & tenure", "Data quality"])
 with overview:
     a,b = st.columns(2)
